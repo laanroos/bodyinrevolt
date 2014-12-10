@@ -14,12 +14,12 @@
 		<header class="entry-header-longtext entry-header-video">
 		<?php if ( in_array( 'category', get_object_taxonomies( get_post_type() ) ) && twentyfourteen_categorized_blog() ) : ?>
 		<div class="entry-meta">
-			<p class="cat-links cat-links-aside"><a class="post-link" rel="<?php the_ID(); ?>" href="<?php the_permalink(); ?>"><?php 
+			<!--<p class="cat-links cat-links-aside"><a class="post-link" rel="<?php the_ID(); ?>" href="<?php the_permalink(); ?>"><?php 
 $category = get_the_category(); 
 if($category[0]){
 echo $category[0]->cat_name;
 }
-?></a></p>
+?></a></p>-->
 		</div><!-- .entry-meta -->
 		<?php
 			endif;
@@ -35,7 +35,7 @@ echo $category[0]->cat_name;
 		<div class="entry-content-longtext">
 		<p><?php the_title(); ?></p>
 
-		<p><?php $auteur = get_post_meta( get_the_ID(), 'maker1', true );
+		<p class="auteur"><?php $auteur = get_post_meta( get_the_ID(), 'maker1', true );
 			if( ! empty( $auteur ) ) {
 				$deelnamen = explode(", ", $auteur);
 				echo $deelnamen[1];

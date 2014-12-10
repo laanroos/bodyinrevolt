@@ -9,17 +9,17 @@
 ?>
 
 
-	<a class="post-link" rel="<?php the_ID(); ?>" href="<?php the_permalink(); ?>"><div id="post-<?php the_ID(); ?>" class="entry-content entry-content-quote-container">
+	<div id="post-<?php the_ID(); ?>" class="entry-content">
 
-	<header class="entry-header-quote entry-header-video">
+	<header class="entry-header entry-header-video">
 		<?php if ( in_array( 'category', get_object_taxonomies( get_post_type() ) ) && twentyfourteen_categorized_blog() ) : ?>
 		<div class="entry-meta">
-			<!--<p class="cat-links"><?php 
+			<p class="cat-links"><a class="post-link" rel="<?php the_ID(); ?>" href="<?php the_permalink(); ?>"><?php 
 $category = get_the_category(); 
 if($category[0]){
 echo $category[0]->cat_name;
 }
-?></p>-->
+?></a></p>
 		</div><!-- .entry-meta -->
 		<?php
 			endif;
@@ -39,23 +39,14 @@ echo $category[0]->cat_name;
 			<?php edit_post_link( __( 'Edit', 'twentyfourteen' ), '<span class="edit-link">', '</span>' ); ?>-->
 		</div><!-- .entry-meta -->
 	</header><!-- .entry-header -->
+		<script type="text/javascript">
+</script>
 		<div class="entry-content-quote">
-		<!--<table><td class="quote-centreren">-->
-		
-		
-		<div class="quote-anim-container"><div class="quote-anim" id="quote-<?php the_ID(); ?>">
+		<table><td class="quote-centreren"><span class="quote-anim" id="quote-<?php the_ID(); ?>">
 		<?php
-		$content = get_the_content();
-		echo strip_tags($content);
+			the_content();
 		?>
-	
-		</div></div>
-		
-		
-		
-		<!--</td></table>-->
-		
-		
+</span></td></table>
 		
 		
 		
@@ -100,8 +91,14 @@ function fadeInOut<?php the_ID(); ?> () {
 fadeInOut<?php the_ID(); ?>();*/
 
 		</script>
+		
+		<style type="text/css">
+			#quote-<?php the_ID(); ?> span {
+				display:none;
+			}
+		</style>
 		</div> <!-- .entry-content-quote -->
-	</div></a><!-- .entry-content -->
+	</div><!-- .entry-content -->
 	
 	<?php //the_tags( '<footer class="entry-meta"><span class="tag-links">', '', '</span></footer>' ); ?>
 	

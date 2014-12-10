@@ -8,20 +8,25 @@
 
 ?>
 
+<script> 
+$(document).ready(function(){
+  $("#x-<?php the_ID(); ?>").click(function(){
+    $("#post-<?php the_ID(); ?>").animate({height:'0px'});
+  });
+});
+</script> 
+
 	<div id="post-<?php the_ID(); ?>" class="entry-content entry-header-content">
 	<header class="entry-header entry-header-video">
-		<?php if ( in_array( 'category', get_object_taxonomies( get_post_type() ) ) && twentyfourteen_categorized_blog() ) : ?>
-		<a class="post-link" rel="<?php the_ID(); ?>" href="<?php the_permalink(); ?>"><div class="entry-meta">
-			<p class="cat-links"><?php 
-$category = get_the_category(); 
-if($category[0]){
-echo $category[0]->cat_name;
-}
-?></p>
-		</div></a><!-- .entry-meta -->
-		<?php
-			endif;
-		?>
+		<div class="entry-meta">
+		
+			<div class="post-dicht social2" rel="<?php the_ID(); ?>" id="x-<?php the_ID(); ?>" style="width:15px;height:20px;border:1px solid black;cursor:pointer;font-size:12px;padding-top:2px;padding-left:5px;margin:20px 20px 0 20px;color:black;float:right;">X</div> 
+		
+			<?php if($_GET['id']!="2") { ?> <p class="cat-links"><?php 
+								the_title();
+?></p><?php } ?>
+		</div><!-- .entry-meta -->
+
 
 		<div class="entry-meta">
 			<!--<span class="post-format">
@@ -39,31 +44,16 @@ echo $category[0]->cat_name;
 	</header><!-- .entry-header -->
 
 		
-	<div class="entry-content-image entry-header-image" 
+	<div class="entry-content-image entry-header-image featured-page" style="width:100%;height:436px;line-height:1.8em;font-size:1.8em;">
 	
-	<?php 
-		if(has_tag("featured") || isset($_GET['id'])) {
-		echo 'style="width:100%;height:436px;" ';		
-		} else {
-		echo 'style="width:672px;height:436px;" ';
-		}
+	<?php if($_GET['id']=="2") { ?> <p class="page-title"><?php 
+								the_title();
+?></p><?php } ?>
 	
-	?>>
 		<?php
-			the_content( __( 'Continue reading <span class="meta-nav">&rarr;</span>', 'twentyfourteen' ) );
+			the_content();
 			
 		?>
 		
 	</div>
 </div>
-	
-	    <div id="single-post-container-<?php the_ID(); ?>" class="single-post-container single-post-container">
-		    
-		    	<?php	if(isset($_GET['id'])) {
-		    				include("single-loaded.php");
-		    			}
-		    			?>
-
-		    
-	    </div>
-

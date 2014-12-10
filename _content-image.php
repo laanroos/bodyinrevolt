@@ -46,13 +46,6 @@ echo $category[0]->cat_name;
 		</div><!-- .entry-meta -->
 	</header><!-- .entry-header -->
 
-
-
-	<script type="text/javascript">
-
-
-</script>
-	
 		
 	<div class="entry-content-image imgLiquid" 
 	

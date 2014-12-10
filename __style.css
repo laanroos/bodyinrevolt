@@ -555,23 +555,15 @@ input[type="submit"]:active {
 
 .comment-content img,
 .entry-content img,
+.entry-content-image,
 .entry-summary img,
 #site-header img,
 .widget img,
 .wp-caption {
 	width: 100%;
 	height: auto;
-	display:inline-block;
+	display:block;
 	float:left;
-}
-
-.entry-content-image, .entry-content-vrijplaats {
-	float:left;
-	top:-380px;
-	margin:0px;
-	position:relative;
-	display:inline-block;
-	/*border:5px solid red;*/
 }
 
 /**
@@ -602,17 +594,11 @@ img.size-large,
 	float:left;
 }
 
-.entry-content-video p img {
-	min-height:60vh;
-	max-height:100vh;
-	min-width:80%;
-	max-width:110%;
-	display:inline-block;
+.entry-content-video img {
+	width: 100%;
+	height: auto;
+	display:block;
 	float:left;
-}
-
-.entry-content-video p.lossetekst {
-	font-size:60px;
 }
 
 /* Make sure embeds and iframes fit their containers */
@@ -947,17 +933,14 @@ span + .edit-link:before,
 .site-navigation ul {
 	list-style: none;
 	margin: 0;
-	text-align: center;
-	font-size: 1.8em;
-	letter-spacing: 1px;
 }
 
 .site-navigation li {
 	border-top: 1px solid rgba(255, 255, 255, 0.2);
-	padding:20px;
 }
 
 .site-navigation ul ul {
+	margin-left: 20px;
 }
 
 .site-navigation a {
@@ -1083,6 +1066,8 @@ span + .edit-link:before,
 	margin-bottom: 0px;
 }
 
+
+
 /**
  * 6.2 Entry Header
  * -----------------------------------------------------------------------------
@@ -1152,7 +1137,7 @@ p.cat-links {
   display: table-cell; 
   vertical-align: middle; 
   text-align: center;
-  height: 50vh;
+  height: 365px;
 }
 
 .byline {
@@ -1253,13 +1238,8 @@ p.cat-links {
 #normal-posts {
 }
 
-
 .entry-content {
-	height:50vh;
-}
-
-.entry-header-content {
-	height:430px;
+	height:365px;
 }
 
 
@@ -1274,86 +1254,36 @@ p.cat-links {
 	width:100%;
 }
 
+ 
+.entry-content-quote {
+	font-size: 14em;
+	color: white;
+	background-color: #111;
+	width:100%;
+	min-height: 365px;
+	top: -365px;
+	position: relative;
+	z-index: 30;
+	text-transform: uppercase;
+}
+
+.quote-centreren {
+	height:365px;
+	text-align:center;
+	vertical-align:middle;
+	color:white;
+	padding:20px;
+}
+
 .entry-content-longtext,
-.entry-content-video {
-	width: 100% !important;
-	top:-55vh;
+.entry-content-video, 
+.entry-content-image {
+	width: 100%;
+	top:-400px;
 	margin:0px;
 	height:auto;
 	position:relative;
-	display:inline-block;
 	/*border:5px solid red;*/
-}
-
-.entry-content-audio {
-	width: 100% !important;
-	top:-500px;
-	margin:0px;
-	min-height:50vh;
-	position:relative;
-	display:inline-block;
-	/*border:5px solid red;*/
-}
-
-.entry-content-image p img, .entry-content-vrijplaats p img {
-  width: 100%;
-  -webkit-transform-origin: 20% 80%;
-  -webkit-transition: -webkit-transform 30s linear;
-  -moz-transform-origin: 20% 80%;
-  -moz-transition: -moz-transform 30s linear;
-}
-
-.entry-content-image p img.zoomin, .entry-content-vrijplaats p img.zoomin {
-  -webkit-transform: scale(1.2) rotate(0.1deg);
-  -moz-transform: scale(1.2) rotate(0.1deg);
-}
-
-.entry-content-image p img.zoomin.zoomout, .entry-content-vrijplaats p img.zoomin.zoomout {
-  -webkit-transform: scale(1.0) rotate(0.1deg);
-  -moz-transform: scale(1.0) rotate(0.1deg);
-}
-
-.entry-content-image p img.wide, .entry-content-vrijplaats p img.wide {
-	min-height:60vh;
-	max-height:100vh;
-	min-width:80%;
-	max-width:110%;
-}
-
-.tall {
-	width:100%;
-	height:auto;
-}
-
-.entry-header-image {
-	width:100%;
-	height:auto;
-	top:-435px;
-}
-
-
-.hoofd-video, .hoofd-audio {
-	height:430px;
-}
-
-.in-hoofd-video {
-	top:-800px;
-}
-
-.in-hoofd-audio {
-	top:-430px;
-}
-
-.longtext-header {
-	width:100%;
-	height:auto;
-	top:-480px;
-}
-
-.quote-header {
-	width:100%;
-	height:auto;
-	top:-440px;
 }
 
 .entry-content-longtext {
@@ -1382,7 +1312,6 @@ p.cat-links {
 	transition: .40s all;
 	transition-delay: 0.2s;
 }
-
 
 .entry-header:hover {
 	opacity:0.8;
@@ -1595,14 +1524,10 @@ ul.newsticker span {
 
 .archive-title,
 .page-title {
-	font-size: 32px;
-	font-weight: bold;
-	margin: 30px auto 15px auto;
-	padding-bottom:20px;
-	text-transform: uppercase;
-	letter-spacing: 1px;
-	border-bottom: 2px solid black;
-	width:800px;
+	font-size: 16px;
+	font-weight: 900;
+	line-height: 1.5;
+	margin: 0;
 }
 
 .taxonomy-description,

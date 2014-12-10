@@ -6,11 +6,6 @@
 	padding: 10em;
 }
 
-.loaded-content-container div p {
-	font-size: 2em;
-	
-}
-
 .social {
 	height:80px;
 	width:80px;
@@ -23,9 +18,41 @@
 	text-align:center;
 }
 
+.social2 {
+	top:-150px;
+	right:-150px;
+	position:relative;
+	float:right;
+	margin:20px !important;
+	text-align:center;
+}
+
 .social:hover {
 	cursor:pointer;
 }
+
+<?php if (has_post_format( 'Gallery' )) { ?>
+
+.loaded-content-container div p {
+	font-size: 1em;
+}
+
+.loaded-content-container div p img {
+	width:auto;
+	height: auto;
+}
+
+div.loaded-tags {
+	clear:both;
+}
+
+<?php } else { ?>
+
+.loaded-content-container div p {
+	font-size: 2em;
+}
+
+<?php } ?>
 
 
 
@@ -52,9 +79,26 @@ function curPageURL() {
         var winLeft = (screen.width / 2) - (winWidth / 2);
         window.open('http://www.facebook.com/sharer.php?s=100&p[title]=' + title + '&p[summary]=' + descr + '&p[url]=' + url + '&p[images][0]=' + image, 'sharer', 'top=' + winTop + ',left=' + winLeft + ',toolbar=0,status=0,width=' + winWidth + ',height=' + winHeight);
     }
+    
+    
+            
+//dichtklappen van posts      
+       $.ajaxSetup({cache:false});
+       
+        $(".post-dicht").click(function(){
+            var post_rel = $(this).attr("rel");
+			$("#single-post-container-" + post_rel).html("");	   
+        	$url = "http://127.0.0.1/wordpress/";	 
+	        history.pushState("", "", $url);
+			return false;
+        });  
+      
+      
 </script>
 
 	<div class="loaded-content-container">
+
+	<div class="post-dicht social2" rel="<?php the_ID(); ?>" style="width:20px;height:20px;border:1px solid white;cursor:pointer;font-size:12px;padding-top:2px;margin:0px 0 0 20px;">X</div> 
 
 <div class="social" onClick="window.print()"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/print.jpg" onmouseover="this.src='<?php echo get_stylesheet_directory_uri(); ?>/images/print-hover.jpg'" onmouseout="this.src='<?php echo get_stylesheet_directory_uri(); ?>/images/print.jpg'" width="80px"></div>
 

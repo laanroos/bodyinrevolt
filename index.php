@@ -15,16 +15,54 @@
  */
 
 get_header(); ?>
+
 <div id="main-content" class="main-content">
 
 <div id="content" class="site-content" role="main">
 
+
 		<?php
-		
-			get_template_part( 'featured-content' );
+			if(!isset($_GET['thetag']) && !isset($_GET['thecat'])){
+				get_template_part( 'featured-content' );
+			};
 		?>
 		
 		<div id="normal-posts">
+		
+		
+		
+		<?php if(isset($_GET['thetag'])|| isset($_GET['thecat'])){
+					
+					if(isset($_GET['thetag'])) {
+						$the_tag = $_GET['thetag'];
+						$my_query2 = new WP_Query('tag='. $the_tag .'&showposts=-1'); 
+					} else if(isset($_GET['thecat'])) {
+						$the_cat = $_GET['thecat'];
+						$my_query2 = new WP_Query('category_name='. $the_cat .'&showposts=-1'); 
+					}
+					
+					
+					
+					while ($my_query2->have_posts()) : $my_query2->the_post(); ?>
+
+					<div class="entry-container">
+						
+						<?php
+							
+
+							get_template_part( 'content', get_post_format() );
+							
+														?>
+
+						</div>
+
+					<?php endwhile; 
+	
+					}
+		?>
+
+
+
 		
 		<?php	if ( have_posts() ) :
 				// Start the Loop.
@@ -67,6 +105,9 @@ get_header(); ?>
 			endif;
 		?>
 		
+		<script type="text/javascript">
+			beginnen();
+		</script>
 
 		</div>
 

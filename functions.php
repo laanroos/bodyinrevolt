@@ -517,13 +517,17 @@ if ( ! class_exists( 'Featured_Content' ) && 'plugins.php' !== $GLOBALS['pagenow
 // vanaf hier doe ik het zelf
 function rename_post_formats( $safe_text ) {
     if ( $safe_text == 'Aside' )
-        return 'Longtext (aside)';
+        return 'Long text';
     if ( $safe_text == 'Image' )
-        return 'ICK-image (image)';
+        return 'ICK Image';
     if ( $safe_text == 'Quote' )
-        return 'Shorttext (quote)';
+        return 'Quote';
+    if ( $safe_text == 'Gallery' )
+        return 'Vrijplaats';
+    if ( $safe_text == 'Link' )
+        return 'Vimeo Video';
     if ( $safe_text == 'Video' )
-        return 'Found-image (video)';
+        return 'Found Images';
 	if ( $safe_text == 'Audio' )
         return 'Soundcloud (audio)';
 
@@ -561,6 +565,6 @@ function mytheme_setup() {
 add_action('after_setup_theme', 'mytheme_setup');
 
 //p's weghalen bij de content
-//remove_filter('the_content', 'wpautop');
+	//remove_filter('the_content', 'wpautop');
 
 ?>

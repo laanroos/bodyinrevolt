@@ -42,14 +42,10 @@ echo $category[0]->cat_name;
 
 		<div class="entry-content-video">
 		<?php
-			the_content( __( 'Continue reading <span class="meta-nav">&rarr;</span>', 'twentyfourteen' ) );
-			wp_link_pages( array(
-				'before'      => '<div class="page-links"><span class="page-links-title">' . __( 'Pages:', 'twentyfourteen' ) . '</span>',
-				'after'       => '</div>',
-				'link_before' => '<span>',
-				'link_after'  => '</span>',
-			) );
-		?>
+			$content = get_the_content();
+			$content2 = strip_tags($content, '<img>');
+			echo $content2;
+			?>
 		</div>
 	</div><!-- .entry-content --></a>
 

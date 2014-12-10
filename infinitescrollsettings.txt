@@ -1,0 +1,96 @@
+//faden van video content
+$('.entry-content-video').cycle({
+fx:      'fade', 
+speedIn: 5000, 
+speedOut: 5000, 
+timeout:  200 
+});
+
+//animeren van longtext
+$('.entry-content-longtext-container').hover(function() {
+$(this).children('.entry-content-longtext').stop().animate({ fontSize : '1.5em' }, 500);
+}, function() {
+$(this).children('.entry-content-longtext').stop().animate({ fontSize : '3em' }, 500);
+});
+
+//animeren van quote
+
+
+//zorgen dat bij hover de category verschijnt
+$('.entry-content').hover( 
+function() { 
+$(this).children('.entry-header').css("opacity", "0.9" )
+},
+function() { 
+$(this).children('.entry-header').css("opacity", "0")
+});
+    
+//schalen van images
+$(".imgLiquid").imgLiquid();  
+
+//uitklappen van posts
+       $.ajaxSetup({cache:false});
+        $(".post-link").click(function(){
+            var post_link = $(this).attr("href");
+            var post_rel = $(this).attr("rel");
+			
+			$(".single-post-container").html("");
+          $("#single-post-container-" + post_rel).html("...");
+            $("#single-post-container-" + post_rel).load(post_link);
+				
+
+		$('html, body').animate({
+        	scrollTop: $("#post-" + post_rel).offset().top
+        	}, 2);
+        
+        history.pushState("", "", post_link);
+        
+         return false;
+        });
+     
+ //dichtklappen van posts      
+       
+    /*  $(".post-dicht").click(function(){
+            var post_rel = $(this).attr("rel");
+			$("#single-post-container-" + post_rel).html("");	   
+        	$url = "http://127.0.0.1/wordpress/";
+	        history.pushState("", "", $url);
+			return false;
+        });  */
+
+    
+          //kenburns
+//$('.entry-content-image img').addClass('zoomin');
+      
+
+setInterval(function(){
+   $('.zoomin').toggleClass('zoomout');
+},30000);
+       
+        
+    $('.entry-content-image p').find('img').each(function() {
+        var imgClass = (this.width / this.height > 1) ? 'wide' : 'tall';
+        $(this).addClass(imgClass);
+    })
+
+
+//anim quote
+var marquee = $('div.quote-anim-container');
+marquee.each(function() {
+    var mar = $(this),indent = mar.width();
+    mar.marquee = function() {
+        indent--;
+        mar.css('text-indent',indent);
+        if (indent < -1 * mar.children('div.quote-anim').width()) {
+            indent = mar.width();
+        }
+    };
+    mar.data('interval',setInterval(mar.marquee,20));
+});
+
+//animeren van quote interactief
+$('.entry-content-quote-container').hover(function() {
+$(this).children('.entry-content-quote').stop().animate({ fontSize : '3em', paddingTop: '130px' }, 1000);
+}, function() {
+$(this).children('.entry-content-quote').stop().animate({ fontSize : '14em', paddingTop: '0px' }, 1000);
+});

@@ -1,6 +1,5 @@
 <?php
 /**
- * The template for displaying posts in the Image post format
  *
  * @package WordPress
  * @subpackage Twenty_Fourteen
@@ -9,24 +8,17 @@
 
 ?>
 
-	<a class="post-link" rel="<?php the_ID(); 
-			if(has_tag('featured')){
-				echo "a";
-				}
-			?>" href="<?php the_permalink(); ?>"><div id="post-<?php the_ID(); if(has_tag('featured')){
-				echo "a";
-				}
-			?>" class="entry-content">
+	<div id="post-<?php the_ID(); ?>" class="entry-content">
 	<header class="entry-header entry-header-video">
 		<?php if ( in_array( 'category', get_object_taxonomies( get_post_type() ) ) && twentyfourteen_categorized_blog() ) : ?>
-		<div class="entry-meta">
+		<a class="post-link" rel="<?php the_ID(); ?>" href="<?php the_permalink(); ?>"><div class="entry-meta">
 			<p class="cat-links"><?php 
 $category = get_the_category(); 
 if($category[0]){
 echo $category[0]->cat_name;
 }
 ?></p>
-		</div><!-- .entry-meta -->
+		</div></a><!-- .entry-meta -->
 		<?php
 			endif;
 		?>
@@ -46,34 +38,56 @@ echo $category[0]->cat_name;
 		</div><!-- .entry-meta -->
 	</header><!-- .entry-header -->
 
-
-
-	<script type="text/javascript">
-
-
-</script>
-	
 		
 	<div class="entry-content-image imgLiquid" 
 	
 	<?php 
 		if(has_tag("featured") || isset($_GET['id'])) {
-		echo 'style="width:1280px;height:436px;" ';		
+		echo 'style="width:100%;height:436px;" ';		
 		} else {
 		echo 'style="width:672px;height:436px;" ';
 		}
 	
 	?>>
-		<?php
-			the_content( __( 'Continue reading <span class="meta-nav">&rarr;</span>', 'twentyfourteen' ) );
-			
-		?>
+		<?php $vimeoid = get_post_meta( get_the_ID(), 'vimeo-id', true ); ?>
+		<img id="vimeo-<?php echo $vimeoid; ?>" src="" alt="" />
+		
+		
+		
+		<script type="text/javascript">
+		
+		function vimeoLoadingThumb(id){    
+    var url = "http://vimeo.com/api/v2/video/" + id + ".json?callback=showThumb";
+      
+    var id_img = "#vimeo-" + id;
+    var script = document.createElement( 'script' );
+    script.type = 'text/javascript';
+    script.src = url;
+
+    $(id_img).before(script);
+}
+
+function showThumb(data){
+    var id_img = "#vimeo-" + data[0].id;
+    $(id_img).attr('src',data[0].thumbnail_large);
+}
+
+$(function() {
+    vimeoLoadingThumb(<?php echo $vimeoid; ?>);
+});
+		
+		</script>
 		
 	</div>
-</div></a>
+</div>
 	
-	    <div id="single-post-container-<?php the_ID(); if(has_tag('featured')){
-				echo "a";
-				}
-			?>" class="single-post-container"></div>
+	    <div id="single-post-container-<?php the_ID(); ?>" class="single-post-container single-post-container">
+		    
+		    	<?php	if(isset($_GET['id'])) {
+		    				include("single-loaded.php");
+		    			}
+		    			?>
+
+		    
+	    </div>
 

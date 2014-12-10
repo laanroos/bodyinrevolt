@@ -28,8 +28,15 @@
 			?>
 			<div class="entry-container-featured">
 			<?php
-			
-		    get_template_part( 'featured', get_post_format() );
+						//echo "aaaa";
+						$lkjl = get_post_format();
+						if (!$lkjl) {
+							//echo "page" ;
+							get_template_part( 'featured', 'page' );
+						} else {
+							get_template_part( 'featured', get_post_format() );							
+						}
+
 		    
 		    ?>
 			</div>

@@ -30,17 +30,19 @@
 	<?php wp_head(); ?>
 	<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
 	
+<LINK HREF="<?php echo get_stylesheet_directory_uri(); ?>/style2.css" REL="stylesheet" media="screen" TYPE="text/css">
 	<script type="text/javascript" src="<?php echo get_stylesheet_directory_uri(); ?>/js/imgLiquid.js"></script>
 <script type="text/javascript" src="http://malsup.github.com/jquery.cycle.all.js"></script>
 <LINK HREF="<?php echo get_stylesheet_directory_uri(); ?>/print.css" REL="stylesheet" media="print" TYPE="text/css">
 <script type="text/javascript">
-$(document).ready(function() {
-	//faden van video content
+function beginnen() {
+
+//faden van video content
     $('.entry-content-video').cycle({
     fx:      'fade', 
     speedIn: 5000, 
     speedOut: 5000, 
-    timeout:  200 
+    timeout:  200
 	});
 
 //animeren van longtext
@@ -53,12 +55,6 @@ $(document).ready(function() {
 	});
 	
 
-//animeren van quote
-$('.entry-content-quote-container').hover(function() {
-$(this).children('.entry-content-quote').stop().animate({ fontSize : '2em' }, 500);
-}, function() {
-$(this).children('.entry-content-quote').stop().animate({ fontSize : '14em' }, 500);
-});
 
 //zorgen dat bij hover de category verschijnt
 $('.entry-content').hover( 
@@ -68,53 +64,69 @@ $('.entry-content').hover(
    function() { 
      $(this).children('.entry-header').css("opacity", "0")
    });
- 
-
-//uitklappen van posts
-       $.ajaxSetup({cache:false});
-        $(".post-link").click(function(){
-            var post_link = $(this).attr("href");
-            var post_rel = $(this).attr("rel");
-			
-            $("#single-post-container-" + post_rel).html("...");
-            $("#single-post-container-" + post_rel).load(post_link);
-            
-				$(".single-post-container").html("");
-
-		$('html, body').animate({
-        	scrollTop: $("#post-" + post_rel).offset().top
-        	}, 2);
+    
+//schalen van images
+$(".imgLiquid").imgLiquid();          
         
-        history.pushState("", "", post_link);
         
-         return false;
-        };
+     //kenburns
+//$('.entry-content-image img').addClass('zoomin'); //hier verschillende klasses van maken en dan ook verschillende fucnties met verschillende snelheden en groottes
       
-     }); 
-     
-     
-     
-//kenburns
-$(window).load(function(){
-$('.entry-content-image img').addClass('zoomin');
-});
 
 setInterval(function(){
    $('.zoomin').toggleClass('zoomout');
-},10000);
-     
-$(document).ready(function() {
+},30000);
+       
+        
     $('.entry-content-image p').find('img').each(function() {
         var imgClass = (this.width / this.height > 1) ? 'wide' : 'tall';
         $(this).addClass(imgClass);
     })
-})   
-  
-  
-  //tekst tussendoor
-$(document).ready(function(){
-$('.entry-content-video p:not(:has(img))').addClass('lossetekst');
-});   
+
+
+//uitklappen van posts
+       $.ajaxSetup({cache:false});
+       
+        $(".post-link").click(function(){
+            var post_link = $(this).attr("href");
+            var post_rel = $(this).attr("rel");
+			$("#single-post-container-" + post_rel).html("...");
+            $("#single-post-container-" + post_rel).load(post_link);
+            $(".single-post-container").html("");
+			$('html, body').animate({
+        		scrollTop: $("#post-" + post_rel).offset().top
+        	}, 2);	        
+	        history.pushState("", "", post_link);
+			return false;
+        });
+
+
+//anim quote
+var marquee = $('div.quote-anim-container');
+marquee.each(function() {
+    var mar = $(this),indent = mar.width();
+    mar.marquee = function() {
+        indent--;
+        mar.css('text-indent',indent);
+        if (indent < -1 * mar.children('div.quote-anim').width()) {
+            indent = mar.width();
+        }
+    };
+    mar.data('interval',setInterval(mar.marquee,20));
+});
+
+//animeren van quote interactief
+$('.entry-content-quote-container').hover(function() {
+$(this).children('.entry-content-quote').stop().animate({ fontSize : '32em', paddingTop: '130px' }, 1000); //7em, 80px
+}, function() {
+$(this).children('.entry-content-quote').stop().animate({ fontSize : '14em', paddingTop: '0px' }, 1000);
+});
+
+
+}; 
+
+     
+     
 
          
 </script>
